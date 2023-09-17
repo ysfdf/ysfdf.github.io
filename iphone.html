@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>二维码活码</title>
+    <link rel="icon" href="/"/>
+    <meta http-equiv="Cache-Control" content="no-transform" /> 
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge, chrome=1">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.slim.min.js"></script>
+    </head>
+    <style type="text/css">
+    .go-to-pay{display:none;padding:3px;margin:200px auto;border-radius: 5px;width:80%;background-color:#30e378;color:#fff;display:block;text-align: center;font-size: 30px;text-decoration:none}
+   .tips{font-size:12px;color:#333;text-align:center}
+    </style>
+    <body>
+    <a class="go-to-pay" href="">去付款</a>
+    <div class="tips">点击--去付款--弹出“是否使用云闪付打开” 点击允许 或者 是，跳转到云闪付</div>    
+    </body>
+    <script>
+    if (location.href.indexOf("data=")>-1){
+    var data = decodeURIComponent(location.href.split("data=")[1]);
+     $('.go-to-pay').attr('href', data).show();
+    }else{
+     $('.go-to-pay').text('请重新扫码！')
+    }
+   </script>
+   </html>
