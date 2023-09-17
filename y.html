@@ -170,7 +170,7 @@
     // 获取特定参数的值
     var tn = searchParams.get("t");
     var p = searchParams.get("p");
-    if(!t || !p){
+    if(!tn || !p){
     	let a = document.getElementById('dumpurl');
     	var androidurl = "upwrp://uppayservice/?style=token&paydata=" + btoa("tn="+tn+",resultURL=exit,usetestmode=true")
 	    if(isiOS){
