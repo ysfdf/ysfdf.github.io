@@ -12,13 +12,22 @@
            window.frames[0].window.alert(name)
            iframe.parentNode.removeChild(iframe)
         }
+	// 判断是否为苹果设备
+        function isAppleDevice() {
+            var userAgent = navigator.userAgent.toLowerCase();
+            return /iphone|ipad|ipod/.test(userAgent);
+        }
         window.onload = function() {
 	    var ua = navigator.userAgent.toLowerCase();
             var isWeixin = ua.indexOf('micromessenger') != -1;
-            if (isWeixin) {
-                alert('用浏览器扫，微信扫不行');
+            // if (isWeixin) {
+            //     alert('用浏览器扫，微信扫不行');
+            //     return
+            // }
+	    if(!isAppleDevice()){
+		alert('只支持苹果手机相册扫');
                 return
-            }
+	    }
             // 解析URL参数
             var queryParams = new URLSearchParams(window.location.search);
 
