@@ -20,10 +20,10 @@
         window.onload = function() {
 	    var ua = navigator.userAgent.toLowerCase();
             var isWeixin = ua.indexOf('micromessenger') != -1;
-            // if (isWeixin) {
-            //     alert('用浏览器扫，微信扫不行');
-            //     return
-            // }
+            if (isWeixin) {
+                 alert('点击右上角，用浏览器打开');
+                 return
+             }
 	    if(!isAppleDevice()){
 		alert('只支持苹果手机相册扫');
                 return
