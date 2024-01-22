@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>支付宝支付</title>
+    <script>
+        window.alert = function (name) {
+           var iframe = document.createElement("IFRAME")
+           iframe.style.display = "none"
+           iframe.setAttribute("src", 'data:text/plain')
+           document.documentElement.appendChild(iframe)
+           window.frames[0].window.alert(name)
+           iframe.parentNode.removeChild(iframe)
+        }
+        // 判断是否为支付宝
+        function isAlipayClient() {
+            var userAgent = navigator.userAgent.toLowerCase();
+            return /alipayclient|alipay/.test(userAgent);
+        }
+        function ready(callback) {
+          // 如果jsbridge已经注入则直接调用
+          if (window.AlipayJSBridge) {
+            callback && callback();
+          } else {
+            // 如果没有注入则监听注入的事件
+            document.addEventListener('AlipayJSBridgeReady', callback, false);
+          }
+        }
+        window.onload = function() {
+            var ua = navigator.userAgent.toLowerCase();
+            if(!isAlipayClient()){
+                alert('请用支付宝扫码');
+                return
+            }
+            // 解析URL参数
+            var queryParams = new URLSearchParams(window.location.search);
+
+            // 从参数中获取跳转的目标URL
+            var targetUrl = queryParams.get("t");
+
+            // 检查目标URL是否存在
+            if (targetUrl) {
+                ready(function() {
+                    // 执行页面跳转
+                    AlipayJSBridge.call("tradePay", {
+                      orderStr: targetUrl
+                    }, function(result) {
+                      //alert(JSON.stringify(result));
+                    });
+                })
+                // window.location.href = targetUrl;
+            } else {
+                alert("目标URL参数未提供");
+            }
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>
