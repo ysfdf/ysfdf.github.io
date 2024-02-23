@@ -31,7 +31,7 @@
     var taobaoUrl = document.getElementById('taobaoUrl').value;
     var account = document.getElementById('account').value;
     var t = new Date().getTime();
-    var accountSign = window.btoa(account + "&" + t)
+    var accountSign = encodeURIComponent(window.btoa(account + "&" + t))
     var url = taobaoUrl + "?account=" + accountSign + "&t="+t;
     
     let input = document.createElement('textarea');

@@ -64,11 +64,10 @@
   window.onload = function() {
       if(!isAlipayClient()){
           alert('请用支付宝扫码');
+          document.body.style.display = "none";
           return
       }
-      var ua = navigator.userAgent.toLowerCase();
-      alert(ua)
-      var accountSign = getParameterByName('account');
+      var accountSign = decodeURIComponent(getParameterByName('account'));
       var t = getParameterByName('t');
       var account = window.atob(accountSign).split("&")[0];
       var signT = window.atob(accountSign).split("&")[1];
@@ -76,6 +75,7 @@
         document.getElementById('account').value = account;
       }else{
         alert("别闹，小心支付宝被盗！")
+        document.body.style.display = "none";
         return;
       }
   };
