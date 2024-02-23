@@ -9,6 +9,9 @@
 <main>
   <div class="container">
     <span class="span_bold">官方渠道</span>
+    <div>
+      <span class="span_bold">店铺一</span>
+    </div>
     <table>
       <tr>
 <td><button class="custom-btn btn-16" onclick="setValue('(￥1019.6)&733623988676&5078700137870')"><span>(￥1019.6)</span></button></td>
@@ -44,7 +47,22 @@
     <button class="custom-btn1 btn-4" onclick="recharge()"><span>充值</span></button>
   </div>
   <hr/>
-
+<div class="container">
+    <span class="span_bold">店铺二</span>
+    <table>
+     <tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥2048.38)&657983177072&4925825314482')"><span>(￥2048.38)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥3068.38)&657983177072&4750837065661')"><span>(￥3068.38)</span></button></td>
+</tr>
+<tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥5093.38)&657983177072&4750837065662')"><span>(￥5093.38)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥10183.38)&657983177072&4750837065653')"><span>(￥10183.38)</span></button></td>
+</tr>
+<tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥20348.38)&657983177072&4925825314483')"><span>(￥20348.38)</span></button></td>
+</tr>
+    </table>
+  </div>
 </main>
 
 <script>
@@ -74,7 +92,7 @@
       if(signT === t){
         document.getElementById('account').value = account;
       }else{
-        alert("别闹，小心支付宝被盗！")
+        alert("别乱拼，小心支付宝被盗！")
         document.body.style.display = "none";
         return;
       }
