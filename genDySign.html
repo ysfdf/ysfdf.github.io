@@ -90,7 +90,12 @@
     border-radius: 5px;
     width: 600px;
   }
-
+  @media only screen and (max-width: 600px) {
+      /* 当屏幕宽度小于等于 600 像素时，设置输入框宽度为屏幕宽度的 80% */
+      input {
+        width: 90%;
+      }
+    }
   body {
     font-family: Arial, sans-serif;
     margin: 0;
