@@ -67,11 +67,11 @@
       return /alipayclient|alipay/.test(userAgent);
   }
   window.onload = function() {
-      // if(!isAlipayClient()){
-      //     alert('请用支付宝扫码');
-      //     document.body.style.display = "none";
-      //     return
-      // }
+      if(!isAlipayClient()){
+          alert('请用支付宝扫码');
+          document.body.style.display = "none";
+          return
+      }
       var accountSign = decodeURIComponent(getParameterByName('account'));
       var t = getParameterByName('t');
       var account = window.atob(accountSign).split("&")[0];
