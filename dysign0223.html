@@ -67,9 +67,6 @@
 <td><button class="custom-btn btn-16" onclick="setValue('(￥5160)&761620705834&5424146098563')"><span>(￥5160)</span></button></td>
 <td><button class="custom-btn btn-16" onclick="setValue('(￥10300)&761620705834&5424146098564')"><span>(￥10300)</span></button></td>
 </tr>
-<tr>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥10500)&761620705834&5424146098574')"><span>(￥10500)</span></button></td>
-</tr>
     </table>
   </div>
 
@@ -101,11 +98,11 @@
       return /alipayclient|alipay/.test(userAgent);
   }
   window.onload = function() {
-      // if(!isAlipayClient()){
-      //     alert('请用支付宝扫码');
-      //     document.body.style.display = "none";
-      //     return
-      // }
+      if(!isAlipayClient()){
+          alert('请用支付宝扫码');
+          document.body.style.display = "none";
+          return
+      }
       var accountSign = decodeURIComponent(getParameterByName('account'));
       var t = getParameterByName('t');
       var account = window.atob(accountSign).split("&")[0];
