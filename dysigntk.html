@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>斗币(石)充值</title>
+</head>
+<body>
+<main>
+  <div class="container">
+    <span class="span_bold">官方渠道</span>
+    <hr/>
+    <table>
+      <tr>
+<td><button class="custom-btn btn-16" onclick="setValue(1)"><span>(￥5000)</span></button></td>
+</tr>
+    </table>
+  </div>
+  <hr/>
+
+
+   <hr/>
+  <div class="container">
+    充值金额: <input type="text" id="myInput" placeholder="请选择充值金额" disabled>
+    <input type="hidden" id="quality" disabled>
+  </div>
+  <div class="container">
+    充值账号: <input type="text" id="account" disabled>
+  </div>
+  <hr/>
+  <div class="container">
+    <button class="custom-btn1 btn-4" onclick="recharge()"><span>充值</span></button>
+  </div>
+</main>
+
+<script>
+  window.alert = function (name) {
+     var iframe = document.createElement("IFRAME")
+     iframe.style.display = "none"
+     iframe.setAttribute("src", 'data:text/plain')
+     document.documentElement.appendChild(iframe)
+     window.frames[0].window.alert(name)
+     iframe.parentNode.removeChild(iframe)
+  }
+  // 判断是否为支付宝
+  function isAlipayClient() {
+      var userAgent = navigator.userAgent.toLowerCase();
+      return /alipayclient|alipay/.test(userAgent);
+  }
+  window.onload = function() {
+      if(!isAlipayClient()){
+          alert('请用支付宝扫码');
+          document.body.style.display = "none";
+          return
+      }
+      var accountSign = decodeURIComponent(getParameterByName('account'));
+      var t = getParameterByName('t');
+      var account = window.atob(accountSign).split("&")[0];
+      var signT = window.atob(accountSign).split("&")[1];
+      if(signT === t){
+        document.getElementById('account').value = account;
+      }else{
+        alert("别乱拼，小心支付宝被盗！")
+        document.body.style.display = "none";
+        return;
+      }
+  };
+  
+
+  var itemId = '';
+  var skuId = '';
+
+  function setValue(quality) {
+    let amount = quality * 5000;
+    document.getElementById('myInput').value = "￥" + amount;
+    document.getElementById('quality').value = quality;
+  }
+
+
+  function recharge() {
+    var num = document.getElementById('myInput').value;
+    if (!num) {
+      alert("请选择充值金额!")
+      return;
+    }
+    var account = document.getElementById('account').value;
+    if (!account) {
+      alert("请确认充值账号!")
+      return;
+    }
+
+    let input = document.createElement('textarea');
+    input.value = account;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    document.body.removeChild(input);
+
+    alert("充值账号复制成功！")
+
+    var quality = document.getElementById('quality').value;
+    var url = "https://market.m.taobao.com/apps/market/games/deal.html?wh_weex=true&referenceType=6&channelId=2503001&quantity="+quality+"&itemId=692491279519&referenceId=201158810&clickTime="+new Date().getTime();
+    window.open(url)
+  }
+
+
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+
+</script>
+</body>
+</html>
+<style>
+  table {
+    border-collapse: collapse;
+    margin: 20px auto;
+  }
+
+  .span_bold {
+    font-weight: bold;
+    color: #b60707;
+  }
+
+  .container {
+    text-align: center;
+  }
+  .container-span{
+    text-align: left;
+  }
+  .container-span img {
+    max-width: 250px;
+    height: auto;
+  }
+  input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 150px;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+
+
+    display: flex;
+    justify-content: center;
+
+  }
+
+  header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+  }
+
+  main {
+    padding: 1em;
+  }
+
+  footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+
+  h1 {
+    position: relative;
+    text-align: center;
+    color: #353535;
+    font-size: 50px;
+    font-family: "Cormorant Garamond", serif;
+  }
+
+  p {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    text-align: left;
+    font-size: 18px;
+    color: #000000;
+  }
+
+  .custom-btn span {
+    margin: 0 5px;
+  }
+
+  button {
+    margin: 10px;
+  }
+
+  .custom-btn1 {
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
+    outline: none;
+  }
+
+  .custom-btn {
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
+    outline: none;
+
+    display: flex;
+    justify-content: center;
+
+  }
+
+
+  .btn-16 {
+    border: none;
+    color: #000;
+  }
+
+  .btn-16:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    direction: rtl;
+    z-index: -1;
+    box-shadow: -7px -7px 20px 0px #fff9,
+    -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002,
+    4px 4px 5px 0px #0001;
+    transition: all 0.3s ease;
+  }
+
+  .btn-16:hover {
+    color: #000;
+  }
+
+
+
+
+
+
+
+  .btn-16:active {
+    top: 2px;
+  }
+
+
+  .btn-4 {
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+    line-height: 42px;
+    padding: 0;
+    border: none;
+  }
+
+  .btn-4:hover {
+    background-color: #89d8d3;
+    background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
+  }
+
+  .btn-4 span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .btn-4:before,
+  .btn-4:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .9),
+    -4px -4px 6px 0 rgba(116, 125, 136, .2),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, .9),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+    transition: all 0.3s ease;
+  }
+
+  .btn-4:before {
+    height: 0%;
+    width: .1px;
+  }
+
+  .btn-4:after {
+    width: 0%;
+    height: .1px;
+  }
+
+  .btn-4:hover:before {
+    height: 100%;
+  }
+
+  .btn-4:hover:after {
+    width: 100%;
+  }
+
+  .btn-4 span:before,
+  .btn-4 span:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .9),
+    -4px -4px 6px 0 rgba(116, 125, 136, .2),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, .9),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+    transition: all 0.3s ease;
+  }
+
+  .btn-4 span:before {
+    width: .1px;
+    height: 0%;
+  }
+
+  .btn-4 span:after {
+    width: 0%;
+    height: .1px;
+  }
+
+  .btn-4 span:hover:before {
+    height: 100%;
+  }
+
+  .btn-4 span:hover:after {
+    width: 100%;
+  }
+</style>
