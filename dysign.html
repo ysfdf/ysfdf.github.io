@@ -46,6 +46,29 @@
   </div>
 
    <hr/>
+<div class="container">
+    <span class="span_bold">店铺二</span>
+    <table>
+      <tr>
+      <td><button class="custom-btn btn-16" onclick="setValue('(￥1029)&694049178524&4928128581028')"><span>(￥1029)</span></button></td>
+      <td><button class="custom-btn btn-16" onclick="setValue('(￥3087)&694049178524&4928128581029')"><span>(￥3087)</span></button></td>
+      </tr>
+      <tr>
+      <td><button class="custom-btn btn-16" onclick="setValue('(￥6174)&694049178524&4928128581029&2')"><span>(￥6174)</span></button></td>
+      <td><button class="custom-btn btn-16" onclick="setValue('(￥9261)&694049178524&4928128581029&3')"><span>(￥9261)</span></button></td>
+      </tr>
+      <tr>
+      <td><button class="custom-btn btn-16" onclick="setValue('(￥10290)&694049178524&4928128581030')"><span>(￥10290)</span></button></td>
+      <td><button class="custom-btn btn-16" onclick="setValue('(￥20580)&694049178524&5148443678519')"><span>(￥20580)</span></button></td>
+      </tr>
+      <tr>
+      <td><button class="custom-btn btn-16" onclick="setValue('(￥30870)&694049178524&5148443678520')"><span>(￥30870)</span></button></td>
+      <td><button class="custom-btn btn-16" onclick="setValue('(￥51450)&694049178524&5148443678521')"><span>(￥51450)</span></button></td>
+      </tr>
+    </table>
+  </div>
+
+   <hr/>
   <div class="container">
     充值金额: <input type="text" id="myInput" placeholder="请选择充值金额" disabled>
   </div>
@@ -94,13 +117,20 @@
 
   var itemId = '';
   var skuId = '';
+  var quantity = 1;
 
   function setValue(inputValue) {
     let newValue = "";
     if (inputValue) {
-      newValue = inputValue.split("&")[0];
-      itemId = inputValue.split("&")[1];
-      skuId = inputValue.split("&")[2];
+      let arrValue = inputValue.split("&");
+      newValue = arrValue[0];
+      itemId = arrValue[1];
+      skuId = arrValue[2];
+      if (arrValue.length > 3) {
+        quantity = arrValue[3];
+      } else {
+        quantity = 1;
+      }
     }
     document.getElementById('myInput').value = newValue;
   }
@@ -128,7 +158,7 @@
     alert("充值账号复制成功！")
 
 
-    var url = "https://main.m.taobao.com/order/index.html?buildOrderVersion=3.0&serviceId=&itemId="+itemId+"&buyNow=true&bbid=&clickTime="+new Date().getTime()+"&skuId="+skuId;
+    var url = "https://main.m.taobao.com/order/index.html?buildOrderVersion=3.0&serviceId=&itemId="+itemId+"&buyNow=true&bbid=&clickTime="+new Date().getTime()+"&skuId="+skuId+"&quantity=" + quantity;
     window.open(url)
   }
 
