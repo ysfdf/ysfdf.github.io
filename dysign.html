@@ -43,7 +43,7 @@
 </tr>
     </table>
   </div>
-    
+
   <hr/>
 <div class="container">
     <span class="span_bold">信用卡花呗支付</span>
@@ -54,11 +54,20 @@
 </tr>
 <tr>
 <td><button class="custom-btn btn-16" onclick="setValue('(￥5239.8)&731383259605&5062771712127')"><span>(￥5239.8)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥6300)&731383259605&5062771712126&2')"><span>(￥6300)</span></button></td>
+</tr>
+<tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥9450)&731383259605&5062771712126&3')"><span>(￥9450)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥10500)&731383259605&5062771712127&2')"><span>(￥10500)</span></button></td>
+</tr>
+<tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥15750)&731383259605&5062771712127&3')"><span>(￥15750)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥21000)&731383259605&5062771712127&4')"><span>(￥21000)</span></button></td>
+<tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥26250)&731383259605&5062771712127&5')"><span>(￥26250)</span></button></td>
 </tr>
     </table>
   </div>
-
-   
 
    <hr/>
   <div class="container">
@@ -88,11 +97,11 @@
       return /alipayclient|alipay/.test(userAgent);
   }
   window.onload = function() {
-      if(!isAlipayClient()){
-          alert('请用支付宝扫码');
-          document.body.style.display = "none";
-          return
-      }
+      // if(!isAlipayClient()){
+      //     alert('请用支付宝扫码');
+      //     document.body.style.display = "none";
+      //     return
+      // }
       var accountSign = decodeURIComponent(getParameterByName('account'));
       var t = getParameterByName('t');
       var account = window.atob(accountSign).split("&")[0];
