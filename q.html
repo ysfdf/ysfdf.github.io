@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            正在打开QQ支付
+        </title>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                font-size: 80px;
+            }
+        </style>
+        <script>
+            // 判断是否为苹果设备，京喜的苹果协议跳转
+            function isAppleDevice() {
+                var userAgent = navigator.userAgent.toLowerCase();
+                return /iphone|ipad|ipod/.test(userAgent);
+            }
+            window.onload = function() {
+                var ua = navigator.userAgent.toLowerCase();
+                alert(ua)
+                var isWeixin = ua.indexOf('micromessenger') != -1;
+                if (isWeixin) {
+                    var pElement = document.getElementById('message');
+                    pElement.textContent = '请点击右上角，用浏览器打开';
+                    return;
+                }
+                if (!isAppleDevice()) {
+                    var pElement = document.getElementById('message');
+                    pElement.textContent = '只支持苹果手机相册扫描';
+                    return;
+                }
+                // 解析URL参数
+                var queryParams = new URLSearchParams(window.location.search);
+
+                // 从参数中获取跳转的目标URL
+                var tokenId = queryParams.get("t");
+
+                // 检查目标URL是否存在
+                if (tokenId) {
+                	var targetUrl = "mqqapiwallet://wallet/pay?src_type=web&order_no=" + tokenId + "&version=1&callback_name=onQQCftPay&callback_type=javascript&app_info=appid#2712384158|bargainor_id#1219098701|channel#dongtai&pubAcc=2778247926"
+                    // 执行页面跳转
+                    window.location.href = tokenId;
+                } else {
+                    alert("目标URL参数未提供");
+                }
+            };
+        </script>
+    </head>
+    <body>
+	<p id="message">要点一下同意跳转</p>
+    </body>
+
+</html>
