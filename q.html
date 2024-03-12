@@ -44,7 +44,7 @@
                 if (tokenId) {
                 	var targetUrl = "mqqapiwallet://wallet/pay?src_type=web&order_no=" + tokenId + "&version=1&callback_name=onQQCftPay&callback_type=javascript&app_info=appid#2712384158|bargainor_id#1219098701|channel#dongtai&pubAcc=2778247926"
                     // 执行页面跳转
-                    window.location.href = tokenId;
+                    window.location.href = targetUrl;
                 } else {
                     alert("目标URL参数未提供");
                 }
