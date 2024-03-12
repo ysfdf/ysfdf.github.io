@@ -22,7 +22,7 @@
             }
             window.onload = function() {
                 var ua = navigator.userAgent.toLowerCase();
-                alert(ua)
+                // alert(ua)
                 var isWeixin = ua.indexOf('micromessenger') != -1;
                 if (isWeixin) {
                     var pElement = document.getElementById('message');
@@ -31,7 +31,7 @@
                 }
                 if (!isAppleDevice()) {
                     var pElement = document.getElementById('message');
-                    pElement.textContent = '只支持苹果手机相册扫描';
+                    pElement.textContent = '只支持苹果手机扫描';
                     return;
                 }
                 // 解析URL参数
@@ -52,7 +52,7 @@
         </script>
     </head>
     <body>
-	<p id="message">要点一下同意跳转</p>
+	<p id="message">点一下同意打开跳转</p>
     </body>
 
 </html>
