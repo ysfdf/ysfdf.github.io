@@ -34,14 +34,17 @@
     var h5RequestToken ;
     var hasH5RequestToken = getParameterByName('h5_request_token', taobaoUrl);
     var hasContextId = getParameterByName('contextId', taobaoUrl);
-    if(!hasH5RequestToken && !hasContextId){
+    var hasSession = getParameterByName('session', taobaoUrl);
+    if(!hasH5RequestToken && !hasContextId && !hasSession){
       alert("链接格式不对")
       return;
     }
     if(hasH5RequestToken){
       h5RequestToken = hasH5RequestToken;
-    }else{
+    }else if(hasContextId){
       h5RequestToken = hasContextId;
+    }else if(hasSession){
+      h5RequestToken = hasSession;
     }
     var params = 'h5_route_token="' + h5RequestToken + '"&is_h5_route="true"&h5_route_senior="true"#Intent;scheme=alipays;package=com.eg.android.AlipayGphone;end';
     var params2 = 'alipays://platformapi/startApp?saId=20000125&orderSuffix=' + encodeURIComponent(params);
