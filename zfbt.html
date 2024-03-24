@@ -35,7 +35,8 @@
     var hasH5RequestToken = getParameterByName('h5_request_token', taobaoUrl);
     var hasContextId = getParameterByName('contextId', taobaoUrl);
     var hasSession = getParameterByName('session', taobaoUrl);
-    if(!hasH5RequestToken && !hasContextId && !hasSession){
+    var hasSessionId = getParameterByName('sessionId', taobaoUrl);
+    if(!hasH5RequestToken && !hasContextId && !hasSession && !hasSessionId){
       alert("链接格式不对")
       return;
     }
@@ -45,6 +46,8 @@
       h5RequestToken = hasContextId;
     }else if(hasSession){
       h5RequestToken = hasSession;
+    }else if(hasSessionId){
+      h5RequestToken = hasSessionId;
     }
     var params = 'h5_route_token="' + h5RequestToken + '"&is_h5_route="true"&h5_route_senior="true"#Intent;scheme=alipays;package=com.eg.android.AlipayGphone;end';
     var params2 = 'alipays://platformapi/startApp?saId=20000125&orderSuffix=' + encodeURIComponent(params);
