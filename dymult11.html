@@ -8,18 +8,18 @@
 <body>
 <main>
   <div class="container">
-    <span class="span_bold">官方渠道</span>    
-
-  <hr/>
+    <span class="span_bold">官方渠道</span>
+    <hr/>
 <div class="container">
     <table>
 <tr>
-  <td><button class="custom-btn btn-16" onclick="setValue('(￥10000)&572774500950&')"><span>(￥10000)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥1000)&572774952284&')"><span>(￥1000)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥300)&572774364881&')"><span>(￥300)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥10000)&572774500950')"><span>(￥10000)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥1000)&572774952284')"><span>(￥1000)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥300)&572774364881')"><span>(￥300)</span></button></td>
 </tr>
     </table>
   </div>
+ 
    <hr/>
   <div class="container">
     充值金额: <input type="text" id="myInput" placeholder="请选择充值金额" disabled>
@@ -68,21 +68,12 @@
   
 
   var itemId = '';
-  var skuId = '';
-  var quantity = 1;
 
   function setValue(inputValue) {
     let newValue = "";
     if (inputValue) {
-      let arrValue = inputValue.split("&");
-      newValue = arrValue[0];
-      itemId = arrValue[1];
-      skuId = arrValue[2];
-      if (arrValue.length > 3) {
-        quantity = arrValue[3];
-      } else {
-        quantity = 1;
-      }
+      newValue = inputValue.split("&")[0];
+      itemId = inputValue.split("&")[1];
     }
     document.getElementById('myInput').value = newValue;
   }
@@ -109,12 +100,17 @@
 
     alert("充值账号复制成功！")
 
-
-    var url = "https://main.m.taobao.com/order/index.html?buildOrderVersion=3.0&serviceId=&itemId="+itemId+"&buyNow=true&bbid=&clickTime="+new Date().getTime()+"&skuId="+skuId+"&quantity=" + quantity;
+    // https://market.m.taobao.com/apps/market/games/deal.html?wh_weex=true&referenceType=6&channelId=2503001&quantity=1&itemId=738752747578&referenceId=201158810
+    // https://market.m.taobao.com/apps/market/games/deal.html?wh_weex=true&referenceType=6&channelId=2503001&quantity=1&itemId=738336584756&referenceId=201158810
+    // var url = "https://main.m.taobao.com/detail/index.html?id="+itemId+"&spm=pc_detail."+generateRandomNumber()+".0.0";
+    var url = "https://market.m.taobao.com/apps/market/games/deal.html?wh_weex=true&referenceType=6&channelId=2503001&quantity=1&itemId="+itemId+"&referenceId=201158810";
     window.open(url)
   }
 
-
+function generateRandomNumber() {
+  var randomNumber = Math.floor(Math.random() * 90000000) + 10000000;
+  return randomNumber.toString();
+}
   function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -132,11 +128,9 @@
 <style>
   table {
     border-collapse: collapse;
-/*    margin: 20px auto;*/
+    margin: 20px auto;
   }
-  td, th {
-    padding: 0px;
-  }
+
   .span_bold {
     font-weight: bold;
     color: #b60707;
@@ -215,7 +209,7 @@
   }
 
   button {
-    margin: 5px;
+    margin: 10px;
   }
 
   .custom-btn1 {
@@ -263,9 +257,7 @@
     border: none;
     color: #000;
   }
-  button.custom-btn.btn-16 {
-      font-size: 16px;
-  }
+
   .btn-16:after {
     position: absolute;
     content: "";
