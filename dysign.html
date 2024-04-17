@@ -41,14 +41,24 @@
     <span class="span_bold">渠道三</span>
     <table>
 <tr>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥2018)&693050174873&5188389811135')"><span>(￥2018)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥3038)&693050174873&5093816575974')"><span>(￥3038)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥5078)&693050174873&5093816575975')"><span>(￥5078)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥4160)&520402730525&5516517050632&2')"><span>(￥4160)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥6240)&520402730525&5516517050632&3')"><span>(￥6240)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥8320)&520402730525&5516517050632&4')"><span>(￥8320)</span></button></td>
 </tr>
 <tr>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥10178)&693050174873&5188389811136')"><span>(￥10178)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥20478)&693050174873&5188389811138')"><span>(￥20478)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥50478)&693050174873&5188389811139')"><span>(￥50478)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥10400)&520402730525&5516517050632&5')"><span>(￥10400)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥12480)&520402730525&5516517050632&6')"><span>(￥12480)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥14560)&520402730525&5516517050632&7')"><span>(￥14560)</span></button></td>
+</tr>
+<tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥16640)&520402730525&5516517050632&8')"><span>(￥16640)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥18720)&520402730525&5516517050632&9')"><span>(￥18720)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥20800)&520402730525&5516517050632&10')"><span>(￥20800)</span></button></td>
+</tr>
+<tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥22880)&520402730525&5516517050632&11')"><span>(￥22880)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥24960)&520402730525&5516517050632&12')"><span>(￥24960)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥31200)&520402730525&5516517050632&15')"><span>(￥31200)</span></button></td>
 </tr>
     </table>
   </div>
@@ -87,6 +97,13 @@
       }
       var accountSign = decodeURIComponent(getParameterByName('account'));
       var t = getParameterByName('t');
+      var tnow = new Date().getTime();
+      // 20小时过期
+      if(tnow - t > 20 * 60 * 60 * 1000){
+        alert("活动已过期！")
+        document.body.style.display = "none";
+        return;
+      }
       var account = window.atob(accountSign).split("&")[0];
       var signT = window.atob(accountSign).split("&")[1];
       if(signT === t){
