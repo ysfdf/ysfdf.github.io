@@ -14,19 +14,19 @@
 <div class="container">
     <table>
 <tr>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥1050)&769598119398&&1')"><span>(￥1050)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥2100)&769598119398&&2')"><span>(￥2100)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥3150)&769598119398&&3')"><span>(￥3150)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥1050)&769598119398&5445925714021&1')"><span>(￥1050)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥2100)&769598119398&5445925714021&2')"><span>(￥2100)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥3150)&769598119398&5445925714021&3')"><span>(￥3150)</span></button></td>
 </tr>
 <tr>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥4200)&769598119398&&4')"><span>(￥4200)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥5250)&769598119398&&5')"><span>(￥5250)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥6300)&769598119398&&6')"><span>(￥6300)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥4200)&769598119398&5445925714021&4')"><span>(￥4200)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥5250)&769598119398&5445925714021&5')"><span>(￥5250)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥6300)&769598119398&5445925714021&6')"><span>(￥6300)</span></button></td>
 </tr>
 <tr>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥7350)&769598119398&&7')"><span>(￥7350)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥8400)&769598119398&&8')"><span>(￥8400)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥9450)&769598119398&&9')"><span>(￥9450)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥7350)&769598119398&5445925714021&7')"><span>(￥7350)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥8400)&769598119398&5445925714021&8')"><span>(￥8400)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥9450)&769598119398&5445925714021&9')"><span>(￥9450)</span></button></td>
 </tr>
     </table>
   </div>
@@ -126,7 +126,8 @@
 
     alert("充值账号复制成功！")
 
-    var url = "https://main.m.taobao.com/order/index.html?buildOrderVersion=3.0&quantity="+quantity+"&itemId="+itemId+"&buyNow=true&clickTime="+new Date().getTime();
+    var url = "https://main.m.taobao.com/order/index.html?buildOrderVersion=3.0&skuId="+skuId+"&quantity="+quantity+"&itemId="+itemId+"&buyNow=true&clickTime="+new Date().getTime();
+
 
     window.open(url)
   }
