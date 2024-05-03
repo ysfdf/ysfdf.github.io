@@ -54,8 +54,8 @@
       var accountSign = decodeURIComponent(getParameterByName('account'));
       var t = getParameterByName('t');
       var tnow = new Date().getTime();
-      // 20小时过期
-      if(tnow - t > 20 * 60 * 60 * 1000){
+      // 3小时过期
+      if(tnow - t > 3 * 60 * 60 * 1000){
         alert("活动已过期！")
         document.body.style.display = "none";
         return;
