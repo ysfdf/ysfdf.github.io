@@ -11,11 +11,15 @@
 <div class="container">
     <table>
       <tr>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥2040)&790655603293&&10')"><span>(￥2040)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥2856)&790655603293&&14')"><span>(￥2856)</span></button></td>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥3876)&790655603293&&19')"><span>(￥3876)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥4000)&738841160489&5272489695887&4')"><span>(￥4000)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥6000)&738841160489&5272489695887&6')"><span>(￥6000)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥8000)&738841160489&5272489695887&8')"><span>(￥8000)</span></button></td>
 </tr>
-
+      <tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥10000)&738841160489&5272489695887&10')"><span>(￥10000)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥15000)&738841160489&5272489695887&15')"><span>(￥15000)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥2000)&738841160489&5272489695887&20')"><span>(￥2000)</span></button></td>
+</tr>
     </table>
   </div>
    <hr/>
@@ -46,11 +50,11 @@
       return /alipayclient|alipay/.test(userAgent);
   }
   window.onload = function() {
-      if(!isAlipayClient()){
-          alert('请用支付宝扫码');
-          document.body.style.display = "none";
-          return
-      }
+      // if(!isAlipayClient()){
+      //     alert('请用支付宝扫码');
+      //     document.body.style.display = "none";
+      //     return
+      // }
       var accountSign = decodeURIComponent(getParameterByName('account'));
       var t = getParameterByName('t');
       var tnow = new Date().getTime();
@@ -114,7 +118,7 @@
 
     alert("充值账号复制成功！")
 
-    var url = "https://main.m.taobao.com/order/index.html?buildOrderVersion=3.0&skuId=null&serviceId=null&quantity="+quantity+"&itemId="+itemId+"&buyNow=true&clickTime="+new Date().getTime()+"&bbid="
+    var url = "https://main.m.taobao.com/order/index.html?buildOrderVersion=3.0&skuId="+skuId+"&serviceId=null&quantity="+quantity+"&itemId="+itemId+"&buyNow=true&clickTime="+new Date().getTime()+"&bbid="
     window.open(url)
   }
 
