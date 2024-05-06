@@ -1,0 +1,33 @@
+<script type="text/javascript" src="https://appx/web-view.min.js"></script>
+<!-- 如该 H5 页面需要同时在非支付宝客户端内使用，为避免该请求404，可参考以下写法 -->
+<!-- 请尽量在 html 头部执行以下脚本 -->
+<script>
+  if (navigator.userAgent.indexOf('AliApp') > -1) {
+    document.writeln('<script src="https://appx/web-view.min.js"' + '>' + '<' + '/' + 'script>');
+  }
+</script>
+<script>
+  // 网页向小程序 postMessage 消息
+  my.postMessage({name:"测试支付"});
+  // 接收来自小程序的消息。
+  my.onMessage = function(e) {
+    console.log(e); // {'sendToWebView': '1'}
+  }
+  // 判断是否运行在小程序环境里
+  my.getEnv(function(res) {
+    console.log(res.miniprogram) // true
+  });
+  my.tradePay ({
+    // 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号 trade_no
+    tradeNO: '2024050622001486791404737547',
+    success: res => {
+      my.alert ({
+        content: JSON.stringify (res),
+      });
+    },
+    fail: error => {
+      console.error('调用 my.tradePay 失败: ', JSON.stringify(error));
+    },
+	});  
+
+</script>
