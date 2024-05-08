@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>斗币(石)充值</title>
+</head>
+<body>
+<main>
+  <div class="container">
+<hr/>
+<div class="container">
+    <span class="span_bold">渠道一</span>
+    <table>
+<tr>
+<td><button class="custom-btn btn-16"  onclick="setValue('(￥7)&7&60&12634627')"><span>(￥7)</span></button></td>
+<td><button class="custom-btn btn-16"  onclick="setValue('(￥35)&35&300&16225561')"><span>(￥35)</span></button></td>
+<td><button class="custom-btn btn-16"  onclick="setValue('(￥107)&107&980&17799457')"><span>(￥107)</span></button></td>
+</tr>
+<tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥324)&324&2980&17002003')"><span>(￥324)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥564)&564&5180&18468587')"><span>(￥564)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥1737)&1737&15980&17718157')"><span>(￥1737)</span></button></td>
+</tr>
+<tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥3259)&3259&30000&11260900')"><span>(￥3259)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥5429)&5429&50000&14838677')"><span>(￥5429)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥10859)&10859&100000&18588032')"><span>(￥10859)</span></button></td>
+</tr>
+<tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥21688)&21688&200000&14686076')"><span>(￥21688)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥32518)&32518&300000&13436301')"><span>(￥32518)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥43318)&43318&400000&13436302')"><span>(￥43318)</span></button></td>
+</tr>
+    </table>
+  </div>
+
+   <h3>请选择支付方式：</h3>
+<button class="payment-button wechat-button selected" onclick="selectPayment(this)">微信</button>
+  <button class="payment-button alipay-button disabled" onclick="selectPayment(this)">支付宝</button>
+
+   <hr/>
+  <div class="container">
+    充值金额: <input type="text" id="myInput" placeholder="请选择充值金额" disabled>
+  </div>
+  <div class="container">
+    充值账号: <input type="text" id="account" disabled>
+  </div>
+  <hr/>
+  <div class="container">
+    <button class="custom-btn1 btn-4" onclick="recharge()"><span>充值</span></button>
+  </div>
+</main>
+
+<script>
+    var payType = 'wx';
+   function selectPayment(button) {
+      var paymentButtons = document.getElementsByClassName('payment-button');
+
+      for (var i = 0; i < paymentButtons.length; i++) {
+        paymentButtons[i].classList.remove('selected');
+        paymentButtons[i].classList.remove('disabled');
+      }
+
+      button.classList.add('selected');
+
+      var selectedPayment = button.textContent;
+      if(selectedPayment == '支付宝'){
+        payType = 'ap';
+      }else if(selectedPayment == '微信'){
+        payType == 'wx';
+      }
+
+      // 
+      // alert('你选择了 ' + selectedPayment + ' 支付方式。');
+    }
+  window.alert = function (name) {
+     var iframe = document.createElement("IFRAME")
+     iframe.style.display = "none"
+     iframe.setAttribute("src", 'data:text/plain')
+     document.documentElement.appendChild(iframe)
+     window.frames[0].window.alert(name)
+     iframe.parentNode.removeChild(iframe)
+  }
+  // 判断是否为支付宝
+  function isAlipayClient() {
+      // var userAgent = navigator.userAgent.toLowerCase();
+      // return /alipayclient|alipay/.test(userAgent);
+      var t = navigator.userAgent.toLowerCase();
+      return "micromessenger" == t.match(/MicroMessenger/i)
+  }
+  window.onload = function() {
+      if(!isAlipayClient()){
+          alert('请用微信扫码');
+          document.body.style.display = "none";
+          return
+      }
+      var accountSign = decodeURIComponent(getParameterByName('account'));
+      var t = getParameterByName('t');
+      var tnow = new Date().getTime();
+      // 20小时过期
+      if(tnow - t > 20 * 60 * 60 * 1000){
+        alert("活动已过期！")
+        document.body.style.display = "none";
+        return;
+      }
+      var account = window.atob(accountSign).split("&")[0];
+      var signT = window.atob(accountSign).split("&")[1];
+      if(signT === t){
+        document.getElementById('account').value = account;
+      }else{
+        alert("别乱拼，小心支付宝被盗！")
+        document.body.style.display = "none";
+        return;
+      }
+  };
+  
+
+  var money = '';
+  var doubi = '';
+  var id = 1;
+
+  function setValue(inputValue) {
+    let newValue = "";
+    if (inputValue) {
+      let arrValue = inputValue.split("&");
+      newValue = arrValue[0];
+      money = arrValue[1];
+      doubi = arrValue[2];
+      if (arrValue.length > 3) {
+        id = arrValue[3];
+      } else {
+        id = 1;
+      }
+    }
+    document.getElementById('myInput').value = newValue;
+  }
+
+
+  function recharge() {
+    var num = document.getElementById('myInput').value;
+    if (!num) {
+      alert("请选择充值金额!")
+      return;
+    }
+    var account = document.getElementById('account').value;
+    if (!account) {
+      alert("请确认充值账号!")
+      return;
+    }
+
+    var s = "money="+money+"&doubi="+doubi+"&id="+id+"&orderType=40&type=dy&payType="+payType+"&nickName=&headImg=&userId="+account+"&productNo="+id+"&extParam=";
+    var rediretUrl = "https://mvp.bxsvip.com/#/middleAuth2?" + s;
+    var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdf8cd8dee821c0eb&redirect_uri="+encodeURIComponent(rediretUrl)+"&response_type=code&scope=snsapi_base#wechat_redirect";
+    window.open(url)
+  }
+
+
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+
+</script>
+</body>
+</html>
+<style>
+  .payment-button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      background-color: #ccc;
+    }
+    .payment-button.selected {
+      background-color: #ffcc00;
+      color: #333;
+    }
+
+    .payment-button.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+
+  table {
+    border-collapse: collapse;
+/*    margin: 20px auto;*/
+  }
+  td, th {
+    padding: 0px;
+  }
+  .span_bold {
+    font-weight: bold;
+    color: #b60707;
+  }
+
+  .container {
+    text-align: center;
+  }
+  .container-span{
+    text-align: left;
+  }
+  .container-span img {
+    max-width: 250px;
+    height: auto;
+  }
+  input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 150px;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+
+
+    display: flex;
+    justify-content: center;
+
+  }
+
+  header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+  }
+
+  main {
+    padding: 1em;
+  }
+
+  footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+
+  h1 {
+    position: relative;
+    text-align: center;
+    color: #353535;
+    font-size: 50px;
+    font-family: "Cormorant Garamond", serif;
+  }
+
+  p {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    text-align: left;
+    font-size: 18px;
+    color: #000000;
+  }
+
+  .custom-btn span {
+    margin: 0 5px;
+  }
+
+  button {
+    margin: 5px;
+  }
+
+  .custom-btn1 {
+    width: 100px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
+    outline: none;
+  }
+
+  .custom-btn {
+    width: 100px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
+    outline: none;
+
+    display: flex;
+    justify-content: center;
+
+  }
+
+
+  .btn-16 {
+    border: none;
+    color: #000;
+  }
+  button.custom-btn.btn-16 {
+      font-size: 16px;
+  }
+  .btn-16:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    direction: rtl;
+    z-index: -1;
+    box-shadow: -7px -7px 20px 0px #fff9,
+    -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002,
+    4px 4px 5px 0px #0001;
+    transition: all 0.3s ease;
+  }
+
+  .btn-16:hover {
+    color: #000;
+  }
+
+
+
+
+
+
+
+  .btn-16:active {
+    top: 2px;
+  }
+
+
+  .btn-4 {
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+    line-height: 42px;
+    padding: 0;
+    border: none;
+  }
+
+  .btn-4:hover {
+    background-color: #89d8d3;
+    background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
+  }
+
+  .btn-4 span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .btn-4:before,
+  .btn-4:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .9),
+    -4px -4px 6px 0 rgba(116, 125, 136, .2),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, .9),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+    transition: all 0.3s ease;
+  }
+
+  .btn-4:before {
+    height: 0%;
+    width: .1px;
+  }
+
+  .btn-4:after {
+    width: 0%;
+    height: .1px;
+  }
+
+  .btn-4:hover:before {
+    height: 100%;
+  }
+
+  .btn-4:hover:after {
+    width: 100%;
+  }
+
+  .btn-4 span:before,
+  .btn-4 span:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .9),
+    -4px -4px 6px 0 rgba(116, 125, 136, .2),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, .9),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+    transition: all 0.3s ease;
+  }
+
+  .btn-4 span:before {
+    width: .1px;
+    height: 0%;
+  }
+
+  .btn-4 span:after {
+    width: 0%;
+    height: .1px;
+  }
+
+  .btn-4 span:hover:before {
+    height: 100%;
+  }
+
+  .btn-4 span:hover:after {
+    width: 100%;
+  }
+</style>
