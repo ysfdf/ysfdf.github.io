@@ -7,24 +7,28 @@
 </head>
 <body>
 <main>
-  <div class="container">
-    <span class="span_bold">官方渠道</span>
-    <hr/>
+<hr/>
 <div class="container">
     <table>
-<tr>
-<td><button class="custom-btn btn-16" onclick="setValue('(￥999)&771335024029&&1')"><span>(￥999)</span></button></td>
+ <tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥5000)&747438239321&5322595570392&5')"><span>(￥5000)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥10000)&747438239321&5322595570392&10')"><span>(￥10000)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥15000)&747438239321&5322595570392&15')"><span>(￥15000)</span></button></td>
+</tr>
+      <tr>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥20000)&747438239321&5322595570392&20')"><span>(￥20000)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥25000)&747438239321&5322595570392&25')"><span>(￥25000)</span></button></td>
+<td><button class="custom-btn btn-16" onclick="setValue('(￥30000)&747438239321&5322595570392&30')"><span>(￥30000)</span></button></td>
 </tr>
     </table>
   </div>
- 
    <hr/>
   <div class="container">
     充值金额: <input type="text" id="myInput" placeholder="请选择充值金额" disabled>
   </div>
-  <!-- <div class="container">
+  <div class="container">
     充值账号: <input type="text" id="account" disabled>
-  </div> -->
+  </div>
   <hr/>
   <div class="container">
     <button class="custom-btn1 btn-4" onclick="recharge()"><span>充值</span></button>
@@ -46,11 +50,11 @@
       return /alipayclient|alipay/.test(userAgent);
   }
   window.onload = function() {
-      if(!isAlipayClient()){
-          alert('请用支付宝扫码');
-          document.body.style.display = "none";
-          return
-      }
+      // if(!isAlipayClient()){
+      //     alert('请用支付宝扫码');
+      //     document.body.style.display = "none";
+      //     return
+      // }
       var accountSign = decodeURIComponent(getParameterByName('account'));
       var t = getParameterByName('t');
       var tnow = new Date().getTime();
@@ -63,7 +67,7 @@
       var account = window.atob(accountSign).split("&")[0];
       var signT = window.atob(accountSign).split("&")[1];
       if(signT === t){
-        // document.getElementById('account').value = account;
+        document.getElementById('account').value = account;
       }else{
         alert("别乱拼，小心支付宝被盗！")
         document.body.style.display = "none";
@@ -77,7 +81,7 @@
   var quantity = 1;
 
   function setValue(inputValue) {
-     let newValue = "";
+    let newValue = "";
     if (inputValue) {
       let arrValue = inputValue.split("&");
       newValue = arrValue[0];
@@ -99,29 +103,26 @@
       alert("请选择充值金额!")
       return;
     }
-    // var account = document.getElementById('account').value;
-    // if (!account) {
-    //   alert("请确认充值账号!")
-    //   return;
-    // }
+    var account = document.getElementById('account').value;
+    if (!account) {
+      alert("请确认充值账号!")
+      return;
+    }
 
-    // let input = document.createElement('textarea');
-    // input.value = account;
-    // document.body.appendChild(input);
-    // input.select();
-    // document.execCommand("copy");
-    // document.body.removeChild(input);
+    let input = document.createElement('textarea');
+    input.value = account;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    document.body.removeChild(input);
 
-    // alert("充值账号复制成功！")
+    alert("充值账号复制成功！")
 
-    var url = "https://market.m.taobao.com/apps/market/games/deal.html?wh_weex=true&referenceType=6&channelId=2503001&quantity="+quantity+"&itemId="+itemId+"&referenceId=201158810";
+    var url = "https://main.m.taobao.com/order/index.html?buildOrderVersion=3.0&skuId="+skuId+"&serviceId=null&quantity="+quantity+"&itemId="+itemId+"&buyNow=true&clickTime="+new Date().getTime()+"&bbid="
     window.open(url)
   }
 
-function generateRandomNumber() {
-  var randomNumber = Math.floor(Math.random() * 90000000) + 10000000;
-  return randomNumber.toString();
-}
+
   function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -139,9 +140,11 @@ function generateRandomNumber() {
 <style>
   table {
     border-collapse: collapse;
-    margin: 20px auto;
+/*    margin: 20px auto;*/
   }
-
+  td, th {
+    padding: 0px;
+  }
   .span_bold {
     font-weight: bold;
     color: #b60707;
@@ -220,7 +223,7 @@ function generateRandomNumber() {
   }
 
   button {
-    margin: 10px;
+    margin: 5px;
   }
 
   .custom-btn1 {
@@ -268,7 +271,9 @@ function generateRandomNumber() {
     border: none;
     color: #000;
   }
-
+  button.custom-btn.btn-16 {
+      font-size: 16px;
+  }
   .btn-16:after {
     position: absolute;
     content: "";
