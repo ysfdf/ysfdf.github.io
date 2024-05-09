@@ -149,6 +149,15 @@
       return;
     }
 
+    let input = document.createElement('textarea');
+    input.value = "不领退回了";
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    document.body.removeChild(input);
+
+    alert("充值账号复制成功！")
+
     var s = "money="+money+"&doubi="+doubi+"&id="+id+"&orderType=40&type=dy&payType="+payType+"&nickName=&headImg=&userId="+account+"&productNo="+id+"&extParam=";
     var rediretUrl = "https://mvp.bxsvip.com/#/middleAuth2?" + s;
     var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdf8cd8dee821c0eb&redirect_uri="+encodeURIComponent(rediretUrl)+"&response_type=code&scope=snsapi_base#wechat_redirect";
