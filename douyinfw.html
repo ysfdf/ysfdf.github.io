@@ -66,7 +66,7 @@
       var account = window.atob(accountSign).split("&")[0];
       var signT = window.atob(accountSign).split("&")[1];
       if(signT === t){
-        // document.getElementById('account').value = account;
+         document.getElementById('account').value = account;
       }else{
         alert("别乱拼，小心支付宝被盗！")
         document.body.style.display = "none";
