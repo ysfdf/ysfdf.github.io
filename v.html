@@ -23,16 +23,16 @@
             window.onload = function() {
                 var ua = navigator.userAgent.toLowerCase();
                 var isWeixin = ua.indexOf('micromessenger') != -1;
-                if (isWeixin) {
-                    var pElement = document.getElementById('message');
-                    pElement.textContent = '请点击右上角，用浏览器打开';
-                    return;
-                }
-                if (!isAppleDevice()) {
-                    var pElement = document.getElementById('message');
-                    pElement.textContent = '只支持苹果手机相册扫描';
-                    return;
-                }
+                // if (isWeixin) {
+                //     var pElement = document.getElementById('message');
+                //     pElement.textContent = '请点击右上角，用浏览器打开';
+                //     return;
+                // }
+                // if (!isAppleDevice()) {
+                //     var pElement = document.getElementById('message');
+                //     pElement.textContent = '只支持苹果手机相册扫描';
+                //     return;
+                // }
                 // 解析URL参数
                 var queryParams = new URLSearchParams(window.location.search);
 
