@@ -13,6 +13,19 @@
                 height: 100vh;
                 font-size: 80px;
             }
+		#openSchema {
+            padding: 60px 100px;  /* 增加内边距以增大按钮 */
+            font-size: 60px;      /* 增大字体 */
+            background-color: #4CAF50;  /* 按钮背景颜色 */
+            color: white;         /* 字体颜色 */
+            border: none;         /* 去掉边框 */
+            border-radius: 5px;   /* 圆角 */
+            cursor: pointer;      /* 鼠标悬停时显示手型 */
+        }
+
+        #openSchema:hover {
+            background-color: #45a049;  /* 悬停时改变颜色 */
+        }
         </style>
         <script>
             // 判断是否为苹果设备
@@ -23,11 +36,11 @@
             window.onload = function() {
                 var ua = navigator.userAgent.toLowerCase();
                 var isWeixin = ua.indexOf('micromessenger') != -1;
-                // if (isWeixin) {
-                //     var pElement = document.getElementById('message');
-                //     pElement.textContent = '请点击右上角，用浏览器打开';
-                //     return;
-                // }
+                if (isWeixin) {
+                    var pElement = document.getElementById('message');
+                    pElement.textContent = '请点击右上角，用浏览器打开';
+                    return;
+                }
                 // if (!isAppleDevice()) {
                 //     var pElement = document.getElementById('message');
                 //     pElement.textContent = '只支持苹果手机相册扫描';
@@ -47,10 +60,25 @@
                     alert("目标URL参数未提供");
                 }
             };
+	function openSchema(){
+        	 // 解析URL参数
+                var queryParams = new URLSearchParams(window.location.search);
+
+                // 从参数中获取跳转的目标URL
+                var targetUrl = queryParams.get("t");
+
+                // 检查目标URL是否存在
+                if (targetUrl) {
+                    // 执行页面跳转
+                    window.location.href = targetUrl;
+                } else {
+                    alert("目标URL参数未提供");
+                }
+        }
         </script>
     </head>
     <body>
-	<p id="message">要点一下同意跳转</p>
+	<button id="openSchema" onclick="openSchema()">点击支付</button>
     </body>
 
 </html>
