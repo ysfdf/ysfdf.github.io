@@ -149,18 +149,18 @@
     <div class="clock v2020v2-header__name">
       <span class="clock">收款方(云闪付)</span>
     </div>
-  <div class="tofee">****.00</div>
-
-    <p class="desc">正在打开“云闪付支付”...</p>
-<a id='dumpurl'>
-    <button class="btn" id="btn">
-      <span class="loadingBox"><i class="loading"></i></span>
-      点击支付
-    </button>
-</a>
+<button class="btn" id="paybtn" onclick="redirectToUrl()">
+    点击支付
+  </button>
   </div>
 
 <script type="text/javascript">
+	window.onload = function() {
+   redirectToUrl()
+};
+function redirectToUrl() {
+    const button = document.getElementById('paybtn');
+    // button.disabled = true; // 禁用按钮
 	/** 判断手机是ios/安卓 */
 　　var userAgent = navigator.userAgent;
 　　var isiOS = !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
@@ -175,17 +175,15 @@
     var tn = searchParams.get("t");
     var p = searchParams.get("p");
     if(tn && p){
-    	let a = document.getElementById('dumpurl');
     	var androidurl = "upwrp://uppayservice/?style=token&paydata=" + btoa("tn="+tn+",resultURL=exit,usetestmode=true")
 	    if(isiOS){
 	    	var iosurl = "uppaywallet://uppay?paydata=" + decodeURIComponent(p)
-	        a.href = iosurl;
+		    window.location.href = iosurl;
 	    }else{
-	        a.href = androidurl;
+		    window.location.href = androidurl;
 	    }
-    }else{
-    	$('#btn').text('获取参数失败')
     }
+  }
 </script>
 </body>
   
